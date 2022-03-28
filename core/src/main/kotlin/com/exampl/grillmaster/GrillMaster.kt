@@ -17,6 +17,9 @@ class GrillMaster : ApplicationAdapter(){
     var h = 0f
     lateinit var font : BitmapFont
     lateinit var patty: Array<Texture>
+    var pattyState = 0
+    var pattyWidth = 0f
+    var pattyY = 0f
     override fun create() {
         super.create()
         batch = SpriteBatch()
@@ -29,7 +32,8 @@ class GrillMaster : ApplicationAdapter(){
         patty = arrayOf(Texture("raw.png"), Texture("medium.png"),
                         Texture("done.png"),Texture("burnt.png"))
 
-
+        pattyWidth = patty[0].width.toFloat()
+        pattyY = height
         font = BitmapFont()
         font.color = Color.WHITE
         font.data.setScale(10f)
@@ -38,7 +42,10 @@ class GrillMaster : ApplicationAdapter(){
     override fun render() {
         super.render()
         batch.begin()
+
         batch.draw(background, 0f, 0f, width, height)
+        batch.draw(patty[pattyState], w - pattyWidth / 2, pattyY/2 - 1002)
+
         batch.end()
     }//render
 }//class GrillMaster
