@@ -26,6 +26,7 @@ class GrillMaster : ApplicationAdapter(){
                         // 1: game in progress
                         // 2: game over
     var pattiesNotBurned = 3
+    var pattiesFlipped = 0
 
     lateinit var pattyStates: Array<Texture>
     var pattyState = 0
@@ -120,6 +121,7 @@ class GrillMaster : ApplicationAdapter(){
                     }
                     waitForPatty = true
                     placeNewPatty()
+
                 }
             }
 
@@ -140,7 +142,7 @@ class GrillMaster : ApplicationAdapter(){
             if (pattyState==3) font!!.draw(batch, "Burnt!", 100f, 1500f)
 
             font!!.draw(batch, "" + pattiesNotBurned, 100f, 200f)
-
+            font!!.draw(batch, "" + pattiesFlipped, 875f, 200f)
         }
         else if (gameState==2) { // game is over
             font!!.draw(batch, "Game Over! \nTap to \nplay again.", 100f, 1500f)
@@ -162,6 +164,8 @@ class GrillMaster : ApplicationAdapter(){
             if (pattyFail) {
                 pattiesNotBurned--
                 pattyFail = false
+            } else {
+                pattiesFlipped++
             }
             newPattyTimer = 0f
             waitForPatty = false
